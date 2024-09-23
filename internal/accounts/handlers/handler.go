@@ -6,6 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/mateusffaria/pismo-challenge/internal/accounts/handlers/request"
+	"github.com/mateusffaria/pismo-challenge/internal/accounts/handlers/response"
 	"github.com/mateusffaria/pismo-challenge/internal/accounts/services"
 )
 
@@ -40,6 +41,7 @@ func (ah AccountsHandler) CreateUserAccount(c *gin.Context) {
 		return
 	}
 
+	//TODO: Adjust error handling (duplicates, internal and invalid body)
 	res, err := ah.asp.CreateUserAccount(body)
 	if err != nil {
 		fmt.Println("error saving user account")
@@ -49,5 +51,8 @@ func (ah AccountsHandler) CreateUserAccount(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, res)
+	c.JSON(http.StatusOK, response.UserAccountResponse{
+		AccountId:      res.ID,
+		DocumentNumber: res.DocumentNumber,
+	})
 }
