@@ -1,0 +1,32 @@
+basePath: /api
+definitions:
+  request.UserAccountRequest:
+    properties:
+      document_number:
+        type: string
+    type: object
+info:
+  contact: {}
+  description: A transaction management software API in go using Gin-Framework
+  title: Accounts API
+  version: "1.0"
+paths:
+  /api/v1/accounts:
+    post:
+      description: Save a new user in DB
+      parameters:
+      - description: Create user account
+        in: body
+        name: account
+        required: true
+        schema:
+          $ref: '#/definitions/request.UserAccountRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+      summary: Create a new user account
+      tags:
+      - accounts
+swagger: "2.0"
