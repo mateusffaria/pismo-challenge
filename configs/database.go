@@ -29,14 +29,13 @@ type DBConn struct {
 
 func NewDatabaseConnection(dbc DBConn) *gorm.DB {
 	sqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s", dbc.Host, dbc.Port, dbc.User, dbc.Password, dbc.Dbname)
-	fmt.Println(sqlInfo)
 	if dbc.SSL {
 		sqlInfo += " sslmode=disable"
 	}
 
 	db, err := gorm.Open(postgres.Open(sqlInfo), &gorm.Config{})
 	if err != nil {
-		log.Fatal("database connection failed")
+		log.Fatal("open database connection failed")
 	}
 
 	return db
@@ -45,7 +44,7 @@ func NewDatabaseConnection(dbc DBConn) *gorm.DB {
 func RunMigrations(db *sql.DB) {
 	driver, err := migratePG.WithInstance(db, &migratePG.Config{})
 	if err != nil {
-		log.Fatal("migration WithInstance failed")
+		log.Fatal("migration WithInstance failed: ", err)
 	}
 
 	wd, err := os.Getwd()
@@ -59,12 +58,12 @@ func RunMigrations(db *sql.DB) {
 		migrationsPath,
 		"postgres", driver)
 	if err != nil {
-		log.Fatal("migration NewWithDatabaseInstance failed " + err.Error())
+		log.Fatal("migration NewWithDatabaseInstance failed: ", err)
 	}
 
 	if err := m.Up(); err != nil {
 		if err == migrate.ErrNoChange {
-			log.Println("No new migrations to apply.")
+			log.Println("no new migrations to apply.")
 			return
 		}
 
