@@ -6,14 +6,17 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/mateusffaria/pismo-challenge/internal/accounts/handlers/request"
-	"github.com/mateusffaria/pismo-challenge/internal/accounts/handlers/response"
+	"github.com/mateusffaria/pismo-challenge/internal/accounts/services"
 )
 
 type AccountsHandler struct {
+	asp services.AccountServiceProvider
 }
 
-func NewAccountsHandler() *AccountsHandler {
-	return &AccountsHandler{}
+func NewAccountsHandler(asp services.AccountServiceProvider) *AccountsHandler {
+	return &AccountsHandler{
+		asp: asp,
+	}
 }
 
 // Create User Account		godoc
@@ -37,7 +40,14 @@ func (ah AccountsHandler) CreateUserAccount(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, response.UserAccountResponse{
-		DocumentNumber: body.DocumentNumber,
-	})
+	res, err := ah.asp.CreateUserAccount(body)
+	if err != nil {
+		fmt.Println("error saving user account")
+		c.JSON(500, gin.H{
+			"errors": err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, res)
 }
