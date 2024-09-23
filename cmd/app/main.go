@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -25,7 +26,7 @@ func main() {
 		}
 	}
 
-	configs.NewDatabaseConnection(configs.DBConn{
+	db := configs.NewDatabaseConnection(configs.DBConn{
 		Port:     5432,
 		User:     os.Getenv("DB_USER"),
 		Password: os.Getenv("DB_PASSWORD"),
@@ -33,14 +34,21 @@ func main() {
 		Host:     os.Getenv("DB_HOST"),
 	})
 
+	dbc, err := db.DB()
+	if err != nil {
+		log.Fatal("failed to get db connection")
+	}
+
+	configs.RunMigrations(dbc)
+
 	r := gin.Default()
 
 	//Setup swagger api docs
-	r.GET("/api/docs/*any", ginSwag.WrapHandler(swagFiles.Handler))
+	if os.Getenv("APP_ENV") != "production" {
+		r.GET("/api/docs/*any", ginSwag.WrapHandler(swagFiles.Handler))
+	}
 
-	accountsAPI.SetupApi(r)
-
-	fmt.Println("pg_user " + os.Getenv("DB_USER"))
+	accountsAPI.SetupApi(r, db)
 
 	r.Run(":" + "8080")
 }
