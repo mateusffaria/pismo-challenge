@@ -51,8 +51,8 @@ func (ah AccountsHandler) CreateUserAccount(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, response.UserAccountResponse{
-		AccountId:      res.ID,
+	c.JSON(http.StatusCreated, response.UserAccountResponse{
+		AccountId:      res.ID.String(),
 		DocumentNumber: res.DocumentNumber,
 	})
 }

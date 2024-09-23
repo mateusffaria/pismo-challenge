@@ -21,7 +21,7 @@ func NewAccountRepository(db *gorm.DB) *AccountRepository {
 }
 
 func (ar *AccountRepository) CreateUserAccount(acc domains.Account) (domains.Account, error) {
-	acc.ID = uuid.New().String()
+	acc.ID = uuid.New()
 
 	err := ar.DB.Create(&acc).Error
 	if err != nil {

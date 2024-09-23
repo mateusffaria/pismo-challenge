@@ -1,9 +1,12 @@
 package domains
 
-import "gorm.io/gorm"
+import (
+	"github.com/google/uuid"
+	"gorm.io/gorm"
+)
 
 type Account struct {
 	gorm.Model
-	ID             string
+	ID             uuid.UUID
 	DocumentNumber string
 }
