@@ -8,7 +8,7 @@
     },
     "basePath": "/api",
     "paths": {
-        "/api/v1/accounts": {
+        "/v1/accounts": {
             "post": {
                 "description": "Save a new user in DB",
                 "produces": [
@@ -31,7 +31,10 @@
                 ],
                 "responses": {
                     "201": {
-                        "description": "Created"
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/response.UserAccountResponse"
+                        }
                     }
                 }
             }
@@ -41,6 +44,17 @@
         "request.UserAccountRequest": {
             "type": "object",
             "properties": {
+                "document_number": {
+                    "type": "string"
+                }
+            }
+        },
+        "response.UserAccountResponse": {
+            "type": "object",
+            "properties": {
+                "account_id": {
+                    "type": "string"
+                },
                 "document_number": {
                     "type": "string"
                 }

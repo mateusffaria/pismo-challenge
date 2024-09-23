@@ -5,13 +5,20 @@ definitions:
       document_number:
         type: string
     type: object
+  response.UserAccountResponse:
+    properties:
+      account_id:
+        type: string
+      document_number:
+        type: string
+    type: object
 info:
   contact: {}
   description: A transaction management software API in go using Gin-Framework
   title: Accounts API
   version: "1.0"
 paths:
-  /api/v1/accounts:
+  /v1/accounts:
     post:
       description: Save a new user in DB
       parameters:
@@ -26,6 +33,8 @@ paths:
       responses:
         "201":
           description: Created
+          schema:
+            $ref: '#/definitions/response.UserAccountResponse'
       summary: Create a new user account
       tags:
       - accounts

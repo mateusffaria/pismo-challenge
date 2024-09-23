@@ -8,8 +8,8 @@ import (
 func SetupApi(r *gin.Engine) {
 	ah := accountsHandler.NewAccountsHandler()
 
-	r.Group("v1")
+	group := r.Group("/api/v1")
 	{
-		r.POST("/accounts", ah.CreateUserAccount)
+		group.POST("/accounts", ah.CreateUserAccount)
 	}
 }

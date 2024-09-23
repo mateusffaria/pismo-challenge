@@ -15,7 +15,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/api/v1/accounts": {
+        "/v1/accounts": {
             "post": {
                 "description": "Save a new user in DB",
                 "produces": [
@@ -38,7 +38,10 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "201": {
-                        "description": "Created"
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/response.UserAccountResponse"
+                        }
                     }
                 }
             }
@@ -48,6 +51,17 @@ const docTemplate = `{
         "request.UserAccountRequest": {
             "type": "object",
             "properties": {
+                "document_number": {
+                    "type": "string"
+                }
+            }
+        },
+        "response.UserAccountResponse": {
+            "type": "object",
+            "properties": {
+                "account_id": {
+                    "type": "string"
+                },
                 "document_number": {
                     "type": "string"
                 }
