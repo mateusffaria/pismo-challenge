@@ -1,8 +1,11 @@
 package repositories
 
 import (
+	"errors"
+
 	"github.com/google/uuid"
 	"github.com/mateusffaria/pismo-challenge/internal/accounts/domains"
+	customError "github.com/mateusffaria/pismo-challenge/internal/accounts/repositories/errors"
 	"gorm.io/gorm"
 )
 
@@ -23,9 +26,8 @@ func NewAccountRepository(db *gorm.DB) *AccountRepository {
 func (ar *AccountRepository) CreateUserAccount(acc domains.Account) (domains.Account, error) {
 	acc.ID = uuid.New()
 
-	err := ar.DB.Create(&acc).Error
-	if err != nil {
-		return acc, err
+	if err := ar.DB.Create(&acc).Error; errors.Is(err, gorm.ErrDuplicatedKey) {
+		return acc, customError.NewDuplicateEntity()
 	}
 
 	return acc, nil

@@ -33,7 +33,7 @@ func NewDatabaseConnection(dbc DBConn) *gorm.DB {
 		sqlInfo += " sslmode=disable"
 	}
 
-	db, err := gorm.Open(postgres.Open(sqlInfo), &gorm.Config{})
+	db, err := gorm.Open(postgres.Open(sqlInfo), &gorm.Config{TranslateError: true})
 	if err != nil {
 		log.Fatal("open database connection failed")
 	}

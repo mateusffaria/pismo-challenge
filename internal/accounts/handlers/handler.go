@@ -1,12 +1,13 @@
 package handlers
 
 import (
-	"fmt"
+	"errors"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/mateusffaria/pismo-challenge/internal/accounts/handlers/request"
 	"github.com/mateusffaria/pismo-challenge/internal/accounts/handlers/response"
+	customError "github.com/mateusffaria/pismo-challenge/internal/accounts/repositories/errors"
 	"github.com/mateusffaria/pismo-challenge/internal/accounts/services"
 )
 
@@ -33,19 +34,25 @@ func (ah AccountsHandler) CreateUserAccount(c *gin.Context) {
 
 	err := c.ShouldBindBodyWithJSON(&body)
 	if err != nil {
-		fmt.Println("error binding user body values")
-		c.JSON(500, gin.H{
+		c.JSON(http.StatusBadRequest, gin.H{
 			"errors": err.Error(),
 		})
 
 		return
 	}
 
-	//TODO: Adjust error handling (duplicates, internal and invalid body)
-	res, err := ah.asp.CreateUserAccount(body)
+	err = body.Validate()
 	if err != nil {
-		fmt.Println("error saving user account")
-		c.JSON(500, gin.H{
+		c.JSON(http.StatusUnprocessableEntity, gin.H{
+			"errors": err.Error(),
+		})
+
+		return
+	}
+
+	res, err := ah.asp.CreateUserAccount(body)
+	if errors.Is(err, &customError.DuplicateEntity{}) {
+		c.JSON(http.StatusConflict, gin.H{
 			"errors": err.Error(),
 		})
 		return
