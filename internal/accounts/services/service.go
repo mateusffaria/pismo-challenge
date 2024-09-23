@@ -11,18 +11,18 @@ type AccountServiceProvider interface {
 }
 
 type AccountService struct {
-	AccountRepository repositories.AccountRepositoryProvider
+	ar repositories.AccountRepositoryProvider
 }
 
 func NewAccountService(ar repositories.AccountRepositoryProvider) *AccountService {
 	return &AccountService{
-		AccountRepository: ar,
+		ar: ar,
 	}
 }
 
 func (as *AccountService) CreateUserAccount(uar request.UserAccountRequest) (domains.Account, error) {
 
-	return as.AccountRepository.CreateUserAccount(domains.Account{
+	return as.ar.CreateUserAccount(domains.Account{
 		DocumentNumber: uar.DocumentNumber,
 	})
 }
