@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
+	"github.com/shopspring/decimal"
 	"gorm.io/gorm"
 )
 
@@ -12,6 +13,6 @@ type Transaction struct {
 	ID              uuid.UUID
 	AccountId       uuid.UUID
 	OperationTypeId int
-	Amount          float32
+	Amount          decimal.Decimal
 	EventDate       time.Time
 }

@@ -40,7 +40,7 @@ func main() {
 		log.Fatal("failed to get db connection")
 	}
 
-	configs.RunMigrations(dbc)
+	configs.RunMigrations(dbc, "")
 
 	r := gin.Default()
 

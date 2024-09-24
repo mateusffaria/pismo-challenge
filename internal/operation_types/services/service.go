@@ -3,9 +3,9 @@ package services
 import (
 	"errors"
 
-	"github.com/mateusffaria/pismo-challenge/internal/transaction_types/domains"
-	"github.com/mateusffaria/pismo-challenge/internal/transaction_types/repositories"
-	customErrors "github.com/mateusffaria/pismo-challenge/internal/transaction_types/services/errors"
+	"github.com/mateusffaria/pismo-challenge/internal/operation_types/domains"
+	"github.com/mateusffaria/pismo-challenge/internal/operation_types/repositories"
+	customErrors "github.com/mateusffaria/pismo-challenge/internal/operation_types/services/errors"
 	"gorm.io/gorm"
 )
 

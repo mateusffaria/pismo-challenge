@@ -41,7 +41,7 @@ func NewDatabaseConnection(dbc DBConn) *gorm.DB {
 	return db
 }
 
-func RunMigrations(db *sql.DB) {
+func RunMigrations(db *sql.DB, migrationsPath string) {
 	driver, err := migratePG.WithInstance(db, &migratePG.Config{})
 	if err != nil {
 		log.Fatal("migration WithInstance failed: ", err)
@@ -52,7 +52,9 @@ func RunMigrations(db *sql.DB) {
 		log.Fatal("could not get working directory: ", err)
 	}
 
-	migrationsPath := "file://" + filepath.Join(wd, "db/migrations")
+	if migrationsPath == "" {
+		migrationsPath = "file://" + filepath.Join(wd, "db/migrations")
+	}
 
 	m, err := migrate.NewWithDatabaseInstance(
 		migrationsPath,

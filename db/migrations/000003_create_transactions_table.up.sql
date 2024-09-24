@@ -9,6 +9,6 @@ CREATE TABLE IF NOT EXISTS transactions (
   deleted_at timestamp,
 
   CONSTRAINT fk_transactions_accounts FOREIGN KEY(account_id) REFERENCES accounts(id),
-  CONSTRAINT fk_transactions_transaction_types FOREIGN KEY(operation_type_id) REFERENCES transaction_types(id)
+  CONSTRAINT fk_transactions_operation_types FOREIGN KEY(operation_type_id) REFERENCES operation_types(id)
 );
 

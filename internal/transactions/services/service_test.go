@@ -7,13 +7,14 @@ import (
 
 	"github.com/google/uuid"
 	accDomain "github.com/mateusffaria/pismo-challenge/internal/accounts/domains"
-	ttDomain "github.com/mateusffaria/pismo-challenge/internal/transaction_types/domains"
+	ttDomain "github.com/mateusffaria/pismo-challenge/internal/operation_types/domains"
 	"github.com/mateusffaria/pismo-challenge/internal/transactions/domains"
 	"github.com/mateusffaria/pismo-challenge/internal/transactions/handlers/request"
 	svcErrors "github.com/mateusffaria/pismo-challenge/internal/transactions/services/errors"
 	accRepo "github.com/mateusffaria/pismo-challenge/test/accounts/services"
-	ttSvc "github.com/mateusffaria/pismo-challenge/test/transaction_types/services"
+	ttSvc "github.com/mateusffaria/pismo-challenge/test/operation_types/services"
 	repositories_test "github.com/mateusffaria/pismo-challenge/test/transactions/repositories"
+	"github.com/shopspring/decimal"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
@@ -31,7 +32,7 @@ func TestShouldCreateTransactionSuccessfully(t *testing.T) {
 		ID:              uuid.New(),
 		AccountId:       uuid.New(),
 		OperationTypeId: 1,
-		Amount:          123.4,
+		Amount:          decimal.NewFromFloat(123.4),
 		EventDate:       time.Now(),
 	}
 

@@ -7,7 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	asErrors "github.com/mateusffaria/pismo-challenge/internal/accounts/services/errors"
-	ttErrors "github.com/mateusffaria/pismo-challenge/internal/transaction_types/services/errors"
+	ttErrors "github.com/mateusffaria/pismo-challenge/internal/operation_types/services/errors"
 	"github.com/mateusffaria/pismo-challenge/internal/transactions/handlers/request"
 	"github.com/mateusffaria/pismo-challenge/internal/transactions/handlers/response"
 	"github.com/mateusffaria/pismo-challenge/internal/transactions/services"
@@ -61,10 +61,12 @@ func (th TransactionHandler) CreateTransaction(c *gin.Context) {
 		return
 	}
 
+	fAmount, _ := res.Amount.Float64()
+
 	c.JSON(http.StatusCreated, response.NewTransactionResponse{
 		TransactionId:   res.ID.String(),
 		AccountId:       res.ID.String(),
 		OperationTypeId: res.OperationTypeId,
-		Amount:          res.Amount,
+		Amount:          fAmount,
 	})
 }

@@ -10,7 +10,7 @@
 
 Basic setup:
 
-- [] Docker setup
+- [x] Docker setup
 - [x] Swagger setup
 - [] Adjust Readme containning all instructions (run, docker setup, testing)
 - [x] Git/Github setup

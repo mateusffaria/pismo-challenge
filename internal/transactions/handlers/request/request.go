@@ -10,7 +10,7 @@ import (
 type NewTransactionRequest struct {
 	AccountId       string  `json:"account_id,omitempty" validate:"required"`
 	OperationTypeId int     `json:"operation_type_id,omitempty" validate:"required"`
-	Amount          float32 `json:"amount,omitempty" validate:"required"`
+	Amount          float64 `json:"amount,omitempty" validate:"required"`
 }
 
 func (uar *NewTransactionRequest) Validate() error {
