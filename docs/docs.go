@@ -17,22 +17,22 @@ const docTemplate = `{
     "paths": {
         "/v1/accounts": {
             "post": {
-                "description": "Save a new user in DB",
+                "description": "Save a new  in DB",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "accounts"
                 ],
-                "summary": "Create a new user account",
+                "summary": "Create a new  account",
                 "parameters": [
                     {
-                        "description": "Create user account",
+                        "description": "Create  account",
                         "name": "account",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/request.UserAccountRequest"
+                            "$ref": "#/definitions/request.AccountRequest"
                         }
                     }
                 ],
@@ -40,7 +40,7 @@ const docTemplate = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/response.UserAccountResponse"
+                            "$ref": "#/definitions/response.AccountResponse"
                         }
                     }
                 }
@@ -48,14 +48,14 @@ const docTemplate = `{
         },
         "/v1/accounts/{id}": {
             "get": {
-                "description": "Get the user account stored in DB",
+                "description": "Get the  account stored in DB",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "accounts"
                 ],
-                "summary": "Get user's account",
+                "summary": "Get 's account",
                 "parameters": [
                     {
                         "type": "string",
@@ -69,7 +69,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/response.UserAccountResponse"
+                            "$ref": "#/definitions/response.AccountResponse"
                         }
                     }
                 }
@@ -77,17 +77,17 @@ const docTemplate = `{
         },
         "/v1/transactions": {
             "post": {
-                "description": "Save a new user in DB",
+                "description": "Save a new  in DB",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "transactions"
                 ],
-                "summary": "Create a new user transaction",
+                "summary": "Create a new  transaction",
                 "parameters": [
                     {
-                        "description": "Create trasaction for a given user",
+                        "description": "Create trasaction for a given ",
                         "name": "transaction",
                         "in": "body",
                         "required": true,
@@ -108,6 +108,17 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "request.AccountRequest": {
+            "type": "object",
+            "required": [
+                "document_number"
+            ],
+            "properties": {
+                "document_number": {
+                    "type": "string"
+                }
+            }
+        },
         "request.NewTransactionRequest": {
             "type": "object",
             "required": [
@@ -127,12 +138,12 @@ const docTemplate = `{
                 }
             }
         },
-        "request.UserAccountRequest": {
+        "response.AccountResponse": {
             "type": "object",
-            "required": [
-                "document_number"
-            ],
             "properties": {
+                "account_id": {
+                    "type": "string"
+                },
                 "document_number": {
                     "type": "string"
                 }
@@ -151,17 +162,6 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "transaction_id": {
-                    "type": "string"
-                }
-            }
-        },
-        "response.UserAccountResponse": {
-            "type": "object",
-            "properties": {
-                "account_id": {
-                    "type": "string"
-                },
-                "document_number": {
                     "type": "string"
                 }
             }

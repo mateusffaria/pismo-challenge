@@ -1,5 +1,12 @@
 basePath: /api
 definitions:
+  request.AccountRequest:
+    properties:
+      document_number:
+        type: string
+    required:
+    - document_number
+    type: object
   request.NewTransactionRequest:
     properties:
       account_id:
@@ -13,12 +20,12 @@ definitions:
     - amount
     - operation_type_id
     type: object
-  request.UserAccountRequest:
+  response.AccountResponse:
     properties:
+      account_id:
+        type: string
       document_number:
         type: string
-    required:
-    - document_number
     type: object
   response.NewTransactionResponse:
     properties:
@@ -31,13 +38,6 @@ definitions:
       transaction_id:
         type: string
     type: object
-  response.UserAccountResponse:
-    properties:
-      account_id:
-        type: string
-      document_number:
-        type: string
-    type: object
 info:
   contact: {}
   description: A transaction management software API in go using Gin-Framework
@@ -46,27 +46,27 @@ info:
 paths:
   /v1/accounts:
     post:
-      description: Save a new user in DB
+      description: Save a new  in DB
       parameters:
-      - description: Create user account
+      - description: Create  account
         in: body
         name: account
         required: true
         schema:
-          $ref: '#/definitions/request.UserAccountRequest'
+          $ref: '#/definitions/request.AccountRequest'
       produces:
       - application/json
       responses:
         "201":
           description: Created
           schema:
-            $ref: '#/definitions/response.UserAccountResponse'
-      summary: Create a new user account
+            $ref: '#/definitions/response.AccountResponse'
+      summary: Create a new  account
       tags:
       - accounts
   /v1/accounts/{id}:
     get:
-      description: Get the user account stored in DB
+      description: Get the  account stored in DB
       parameters:
       - description: get account by id
         in: path
@@ -79,15 +79,15 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/response.UserAccountResponse'
-      summary: Get user's account
+            $ref: '#/definitions/response.AccountResponse'
+      summary: Get 's account
       tags:
       - accounts
   /v1/transactions:
     post:
-      description: Save a new user in DB
+      description: Save a new  in DB
       parameters:
-      - description: Create trasaction for a given user
+      - description: 'Create trasaction for a given '
         in: body
         name: transaction
         required: true
@@ -100,7 +100,7 @@ paths:
           description: Created
           schema:
             $ref: '#/definitions/response.NewTransactionResponse'
-      summary: Create a new user transaction
+      summary: Create a new  transaction
       tags:
       - transactions
 swagger: "2.0"
