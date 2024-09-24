@@ -16,5 +16,6 @@ func SetupApi(r *gin.Engine, db *gorm.DB) {
 	group := r.Group("/api/v1")
 	{
 		group.POST("/accounts", ah.CreateUserAccount)
+		group.GET("/accounts/:id", ah.GetUserAccount)
 	}
 }

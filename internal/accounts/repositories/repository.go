@@ -1,16 +1,14 @@
 package repositories
 
 import (
-	"errors"
-
 	"github.com/google/uuid"
 	"github.com/mateusffaria/pismo-challenge/internal/accounts/domains"
-	customError "github.com/mateusffaria/pismo-challenge/internal/accounts/repositories/errors"
 	"gorm.io/gorm"
 )
 
 type AccountRepositoryProvider interface {
 	CreateUserAccount(acc domains.Account) (domains.Account, error)
+	GetUserAccount(id string) (domains.Account, error)
 }
 
 type AccountRepository struct {
@@ -26,9 +24,20 @@ func NewAccountRepository(db *gorm.DB) *AccountRepository {
 func (ar *AccountRepository) CreateUserAccount(acc domains.Account) (domains.Account, error) {
 	acc.ID = uuid.New()
 
-	if err := ar.DB.Create(&acc).Error; errors.Is(err, gorm.ErrDuplicatedKey) {
-		return acc, customError.NewDuplicateEntity()
+	// TODO: Adjust to handle possible coner-cases beyond duplicate key
+	if err := ar.DB.Create(&acc).Error; err != nil {
+		return acc, err
 	}
 
 	return acc, nil
+}
+
+func (ar *AccountRepository) GetUserAccount(id string) (domains.Account, error) {
+	var ua domains.Account
+	res := ar.DB.First(&ua, "id = ?", id)
+	if res.Error != nil {
+		return ua, res.Error
+	}
+
+	return ua, nil
 }
