@@ -1,11 +1,35 @@
 basePath: /api
 definitions:
+  request.NewTransactionRequest:
+    properties:
+      account_id:
+        type: string
+      amount:
+        type: number
+      operation_type_id:
+        type: integer
+    required:
+    - account_id
+    - amount
+    - operation_type_id
+    type: object
   request.UserAccountRequest:
     properties:
       document_number:
         type: string
     required:
     - document_number
+    type: object
+  response.NewTransactionResponse:
+    properties:
+      account_id:
+        type: string
+      amount:
+        type: number
+      operation_type_id:
+        type: integer
+      transaction_id:
+        type: string
     type: object
   response.UserAccountResponse:
     properties:
@@ -59,4 +83,24 @@ paths:
       summary: Get user's account
       tags:
       - accounts
+  /v1/transactions:
+    post:
+      description: Save a new user in DB
+      parameters:
+      - description: Create trasaction for a given user
+        in: body
+        name: transaction
+        required: true
+        schema:
+          $ref: '#/definitions/request.NewTransactionRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.NewTransactionResponse'
+      summary: Create a new user transaction
+      tags:
+      - transactions
 swagger: "2.0"

@@ -74,9 +74,59 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/v1/transactions": {
+            "post": {
+                "description": "Save a new user in DB",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "Create a new user transaction",
+                "parameters": [
+                    {
+                        "description": "Create trasaction for a given user",
+                        "name": "transaction",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.NewTransactionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/response.NewTransactionResponse"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "request.NewTransactionRequest": {
+            "type": "object",
+            "required": [
+                "account_id",
+                "amount",
+                "operation_type_id"
+            ],
+            "properties": {
+                "account_id": {
+                    "type": "string"
+                },
+                "amount": {
+                    "type": "number"
+                },
+                "operation_type_id": {
+                    "type": "integer"
+                }
+            }
+        },
         "request.UserAccountRequest": {
             "type": "object",
             "required": [
@@ -84,6 +134,23 @@ const docTemplate = `{
             ],
             "properties": {
                 "document_number": {
+                    "type": "string"
+                }
+            }
+        },
+        "response.NewTransactionResponse": {
+            "type": "object",
+            "properties": {
+                "account_id": {
+                    "type": "string"
+                },
+                "amount": {
+                    "type": "number"
+                },
+                "operation_type_id": {
+                    "type": "integer"
+                },
+                "transaction_id": {
                     "type": "string"
                 }
             }
