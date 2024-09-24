@@ -38,11 +38,43 @@
                     }
                 }
             }
+        },
+        "/v1/accounts/{id}": {
+            "get": {
+                "description": "Get the user account stored in DB",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "accounts"
+                ],
+                "summary": "Get user's account",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "get account by id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.UserAccountResponse"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
         "request.UserAccountRequest": {
             "type": "object",
+            "required": [
+                "document_number"
+            ],
             "properties": {
                 "document_number": {
                     "type": "string"

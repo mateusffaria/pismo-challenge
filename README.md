@@ -14,10 +14,27 @@ Basic setup:
 - [x] Swagger setup
 - [] Adjust Readme containning all instructions (run, docker setup, testing)
 - [x] Git/Github setup
-- [] .env setup
+- [x] .env setup
+- [] golang-lint
 
 Feature checklist:
 
-- [] Persistance layer
+- [x] Persistance layer
 - [] Automated tests (unit, integration and E-E)
-- []
+- [x] Create User Account
+  - [x] Unit test
+  - [x] Implementation
+  - [] Refactor
+  - [] Error handling
+- [x] Get User Account
+  - [] Unit test
+  - [] Implementation
+  - [] Refactor
+  - [] Error handling
+- [x] Create User Transaction
+  - [] Unit test
+  - [] Integration test
+  - [] Implementation
+    - [] Enum for transaction type validation
+  - [] Refactor
+  - [] Error handling

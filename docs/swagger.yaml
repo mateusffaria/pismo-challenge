@@ -4,6 +4,8 @@ definitions:
     properties:
       document_number:
         type: string
+    required:
+    - document_number
     type: object
   response.UserAccountResponse:
     properties:
@@ -36,6 +38,25 @@ paths:
           schema:
             $ref: '#/definitions/response.UserAccountResponse'
       summary: Create a new user account
+      tags:
+      - accounts
+  /v1/accounts/{id}:
+    get:
+      description: Get the user account stored in DB
+      parameters:
+      - description: get account by id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.UserAccountResponse'
+      summary: Get user's account
       tags:
       - accounts
 swagger: "2.0"
