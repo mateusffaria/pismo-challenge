@@ -28,3 +28,19 @@ func TestShouldCreateUserAccountSuccessfully(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Equal(t, res, accModel)
 }
+
+func TestShouldGetUserAccountSuccessfully(t *testing.T) {
+	repoMock := repositories_test.NewAccountRepositoryMock()
+	accModel := domains.Account{
+		ID:             uuid.New(),
+		DocumentNumber: "1234567890",
+	}
+	repoMock.On("GetUserAccount", "1234567890").Return(accModel, nil)
+
+	svc := NewAccountService(repoMock)
+
+	res, err := svc.GetUserAccount("1234567890")
+
+	assert.NoError(t, err)
+	assert.Equal(t, res, accModel)
+}
