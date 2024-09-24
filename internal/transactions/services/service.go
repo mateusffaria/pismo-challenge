@@ -19,13 +19,13 @@ type TransactionServiceProvider interface {
 type TransactionService struct {
 	tr repositories.TransactionRepositoryProvider
 	as accSvc.AccountServiceProvider
-	tt ttSvc.TransactionTypesServiceProvider
+	tt ttSvc.OperationTypesServiceProvider
 }
 
 func NewTransactionService(
 	tr repositories.TransactionRepositoryProvider,
 	as accSvc.AccountServiceProvider,
-	tt ttSvc.TransactionTypesServiceProvider,
+	tt ttSvc.OperationTypesServiceProvider,
 ) *TransactionService {
 	return &TransactionService{
 		tr: tr,
@@ -41,7 +41,7 @@ func (ts *TransactionService) CreateTransaction(tr request.NewTransactionRequest
 		return domains.Transaction{}, err
 	}
 
-	_, err = ts.tt.GetTransactionType(tr.OperationTypeId)
+	_, err = ts.tt.GetOperationType(tr.OperationTypeId)
 	if err != nil {
 		log.Default().Printf("\nfailed getting operation type %v\n", err)
 

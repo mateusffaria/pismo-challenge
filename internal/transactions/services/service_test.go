@@ -24,8 +24,8 @@ func TestShouldCreateTransactionSuccessfully(t *testing.T) {
 	accSvc := accRepo.NewAccountsService()
 	accSvc.On("GetUserAccount", accId.String()).Return(accDomain.Account{}, nil)
 
-	ttSvc := ttSvc.NewTransactionTypesService()
-	ttSvc.On("GetTransactionType", 1).Return(ttDomain.TransactionType{}, nil)
+	ttSvc := ttSvc.NewOperationTypesService()
+	ttSvc.On("GetOperationType", 1).Return(ttDomain.OperationType{}, nil)
 
 	accModel := domains.Transaction{
 		ID:              uuid.New(),
@@ -56,8 +56,8 @@ func TestShouldHandleTransactionCreationErrors(t *testing.T) {
 	accSvc := accRepo.NewAccountsService()
 	accSvc.On("GetUserAccount", accId.String()).Return(accDomain.Account{}, nil)
 
-	ttSvc := ttSvc.NewTransactionTypesService()
-	ttSvc.On("GetTransactionType", 1).Return(ttDomain.TransactionType{}, nil)
+	ttSvc := ttSvc.NewOperationTypesService()
+	ttSvc.On("GetOperationType", 1).Return(ttDomain.OperationType{}, nil)
 
 	repoMock := repositories_test.NewTransactionRepository()
 	repoMock.On("CreateTransaction", mock.AnythingOfType("domains.Transaction")).Return(domains.Transaction{}, fmt.Errorf("some error"))
@@ -79,8 +79,8 @@ func TestShouldHandleAccountInfoErrors(t *testing.T) {
 	accSvc := accRepo.NewAccountsService()
 	accSvc.On("GetUserAccount", accId.String()).Return(accDomain.Account{}, fmt.Errorf("some error"))
 
-	ttSvc := ttSvc.NewTransactionTypesService()
-	ttSvc.On("GetTransactionType", 1).Return(ttDomain.TransactionType{}, nil)
+	ttSvc := ttSvc.NewOperationTypesService()
+	ttSvc.On("GetOperationType", 1).Return(ttDomain.OperationType{}, nil)
 
 	repoMock := repositories_test.NewTransactionRepository()
 	repoMock.On("CreateTransaction", mock.AnythingOfType("domains.Transaction")).Return(domains.Transaction{}, fmt.Errorf("some error"))
@@ -96,14 +96,14 @@ func TestShouldHandleAccountInfoErrors(t *testing.T) {
 	assert.ErrorContains(t, err, "some error")
 }
 
-func TestShouldHandleTransactionTypeInfoErrors(t *testing.T) {
+func TestShouldHandleOperationTypeInfoErrors(t *testing.T) {
 	accId := uuid.New()
 
 	accSvc := accRepo.NewAccountsService()
 	accSvc.On("GetUserAccount", accId.String()).Return(accDomain.Account{}, nil)
 
-	ttSvc := ttSvc.NewTransactionTypesService()
-	ttSvc.On("GetTransactionType", 1).Return(ttDomain.TransactionType{}, fmt.Errorf("some error"))
+	ttSvc := ttSvc.NewOperationTypesService()
+	ttSvc.On("GetOperationType", 1).Return(ttDomain.OperationType{}, fmt.Errorf("some error"))
 
 	repoMock := repositories_test.NewTransactionRepository()
 	repoMock.On("CreateTransaction", mock.AnythingOfType("domains.Transaction")).Return(domains.Transaction{}, nil)

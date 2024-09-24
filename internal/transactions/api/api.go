@@ -16,8 +16,8 @@ func SetupApi(r *gin.Engine, db *gorm.DB) {
 	ar := accRepo.NewAccountRepository(db)
 	as := accSvc.NewAccountService(ar)
 
-	ttr := ttRepo.NewTransactionType(db)
-	tts := ttSvc.NewTransactionTypesService(ttr)
+	ttr := ttRepo.NewOperationType(db)
+	tts := ttSvc.NewOperationTypesService(ttr)
 
 	tr := repositories.NewTransactionRepository(db)
 	ts := services.NewTransactionService(tr, as, tts)

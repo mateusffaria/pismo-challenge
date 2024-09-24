@@ -1,1 +1,1 @@
-DROP TABLE IF EXISTS transaction_types;
+DROP TABLE IF EXISTS operation_types;

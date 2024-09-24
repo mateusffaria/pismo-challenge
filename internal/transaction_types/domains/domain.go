@@ -4,7 +4,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type TransactionType struct {
+type OperationType struct {
 	gorm.Model
 	Description string
 }

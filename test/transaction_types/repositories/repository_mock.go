@@ -5,16 +5,16 @@ import (
 	"github.com/stretchr/testify/mock"
 )
 
-type TransactionTypesRepository struct {
+type OperationTypesRepository struct {
 	mock.Mock
 }
 
-func NewTransactionTypesRepository() *TransactionTypesRepository {
-	return &TransactionTypesRepository{}
+func NewOperationTypesRepository() *OperationTypesRepository {
+	return &OperationTypesRepository{}
 }
 
-func (m *TransactionTypesRepository) GetTransactionTypeById(id int) (domains.TransactionType, error) {
+func (m *OperationTypesRepository) GetOperationTypeById(id int) (domains.OperationType, error) {
 	args := m.Called(id)
 
-	return args.Get(0).(domains.TransactionType), args.Error(1)
+	return args.Get(0).(domains.OperationType), args.Error(1)
 }

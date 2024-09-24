@@ -9,22 +9,22 @@ import (
 	"gorm.io/gorm"
 )
 
-type TransactionTypesServiceProvider interface {
-	GetTransactionType(transactionTypeId int) (domains.TransactionType, error)
+type OperationTypesServiceProvider interface {
+	GetOperationType(OperationTypeId int) (domains.OperationType, error)
 }
 
-type TransactionTypesService struct {
-	tr repositories.TransactionTypeRepositoryProvider
+type OperationTypesService struct {
+	tr repositories.OperationTypeRepositoryProvider
 }
 
-func NewTransactionTypesService(tr repositories.TransactionTypeRepositoryProvider) *TransactionTypesService {
-	return &TransactionTypesService{
+func NewOperationTypesService(tr repositories.OperationTypeRepositoryProvider) *OperationTypesService {
+	return &OperationTypesService{
 		tr: tr,
 	}
 }
 
-func (ts *TransactionTypesService) GetTransactionType(transactionTypeId int) (domains.TransactionType, error) {
-	tt, err := ts.tr.GetTransactionTypeById(transactionTypeId)
+func (ts *OperationTypesService) GetOperationType(OperationTypeId int) (domains.OperationType, error) {
+	tt, err := ts.tr.GetOperationTypeById(OperationTypeId)
 	if err != nil {
 		switch {
 		case errors.Is(err, gorm.ErrRecordNotFound):

@@ -5,22 +5,22 @@ import (
 	"gorm.io/gorm"
 )
 
-type TransactionTypeRepositoryProvider interface {
-	GetTransactionTypeById(id int) (domains.TransactionType, error)
+type OperationTypeRepositoryProvider interface {
+	GetOperationTypeById(id int) (domains.OperationType, error)
 }
 
-type TransactionType struct {
+type OperationType struct {
 	DB *gorm.DB
 }
 
-func NewTransactionType(db *gorm.DB) *TransactionType {
-	return &TransactionType{
+func NewOperationType(db *gorm.DB) *OperationType {
+	return &OperationType{
 		DB: db,
 	}
 }
 
-func (ar *TransactionType) GetTransactionTypeById(id int) (domains.TransactionType, error) {
-	var tt domains.TransactionType
+func (ar *OperationType) GetOperationTypeById(id int) (domains.OperationType, error) {
+	var tt domains.OperationType
 
 	res := ar.DB.First(&tt, "id = ?", id)
 	if res.Error != nil {
