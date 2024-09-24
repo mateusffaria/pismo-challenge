@@ -23,6 +23,7 @@ RUN apk update && apk add ca-certificates && apk add tzdata
 WORKDIR /
 
 COPY --from=build-stage /pismo-app /pismo-app
+COPY --from=build-stage /app/db/migrations /db/migrations
 
 EXPOSE 8080
 
