@@ -1,21 +1,25 @@
 package handlers
 
 import (
+	"errors"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	asErrors "github.com/mateusffaria/pismo-challenge/internal/accounts/services/errors"
+	ttErrors "github.com/mateusffaria/pismo-challenge/internal/transaction_types/services/errors"
 	"github.com/mateusffaria/pismo-challenge/internal/transactions/handlers/request"
 	"github.com/mateusffaria/pismo-challenge/internal/transactions/handlers/response"
 	"github.com/mateusffaria/pismo-challenge/internal/transactions/services"
 )
 
 type TransactionHandler struct {
-	asp services.TransactionServiceProvider
+	tsp services.TransactionServiceProvider
 }
 
-func NewTransactionHandler(asp services.TransactionServiceProvider) *TransactionHandler {
+func NewTransactionHandler(tsp services.TransactionServiceProvider) *TransactionHandler {
 	return &TransactionHandler{
-		asp: asp,
+		tsp: tsp,
 	}
 }
 
@@ -27,7 +31,7 @@ func NewTransactionHandler(asp services.TransactionServiceProvider) *Transaction
 // @Tags 											transactions
 // @Success 									201 {object} response.NewTransactionResponse
 // @Router 										/v1/transactions [post]
-func (ah TransactionHandler) CreateTransaction(c *gin.Context) {
+func (th TransactionHandler) CreateTransaction(c *gin.Context) {
 	body := request.NewTransactionRequest{}
 
 	err := c.ShouldBindBodyWithJSON(&body)
@@ -44,9 +48,16 @@ func (ah TransactionHandler) CreateTransaction(c *gin.Context) {
 		return
 	}
 
-	res, err := ah.asp.CreateTransaction(body)
+	res, err := th.tsp.CreateTransaction(body)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"errors": err.Error()})
+		fmt.Printf("error %v", err)
+		switch {
+		case (errors.Is(err, ttErrors.ErrNotFound) || errors.Is(err, asErrors.ErrAccountNotFound)):
+			c.JSON(http.StatusNotFound, gin.H{"errors": err.Error()})
+		default:
+			c.JSON(http.StatusInternalServerError, gin.H{"errors": err.Error()})
+		}
+
 		return
 	}
 

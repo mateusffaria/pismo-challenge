@@ -1,8 +1,12 @@
 package services
 
 import (
+	"errors"
+
 	"github.com/mateusffaria/pismo-challenge/internal/transaction_types/domains"
 	"github.com/mateusffaria/pismo-challenge/internal/transaction_types/repositories"
+	customErrors "github.com/mateusffaria/pismo-challenge/internal/transaction_types/services/errors"
+	"gorm.io/gorm"
 )
 
 type TransactionTypesServiceProvider interface {
@@ -22,7 +26,12 @@ func NewTransactionTypesService(tr repositories.TransactionTypeRepositoryProvide
 func (ts *TransactionTypesService) GetTransactionType(transactionTypeId int) (domains.TransactionType, error) {
 	tt, err := ts.tr.GetTransactionTypeById(transactionTypeId)
 	if err != nil {
-		return tt, err
+		switch {
+		case errors.Is(err, gorm.ErrRecordNotFound):
+			return tt, customErrors.ErrNotFound
+		default:
+			return tt, customErrors.ErrInternalDatabaseError
+		}
 	}
 
 	return tt, nil

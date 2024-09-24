@@ -32,9 +32,9 @@ Feature checklist:
   - [x] Refactor
   - [x] Error handling
 - [] Create User Transaction
-  - [] Unit test
+  - [x] Unit test
   - [] Integration test
-  - [] Implementation
-    - [] Enum for transaction type validation
-  - [] Refactor
+  - [x] Implementation
+    - [x] Enum for transaction type validation
+  - [x] Refactor
   - [] Error handling

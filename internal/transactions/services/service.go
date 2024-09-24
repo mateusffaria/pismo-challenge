@@ -43,7 +43,7 @@ func (ts *TransactionService) CreateTransaction(tr request.NewTransactionRequest
 
 	_, err = ts.tt.GetTransactionType(tr.OperationTypeId)
 	if err != nil {
-		log.Default().Printf("\nfailed getting transaction type %v\n", err)
+		log.Default().Printf("\nfailed getting operation type %v\n", err)
 
 		return domains.Transaction{}, err
 	}

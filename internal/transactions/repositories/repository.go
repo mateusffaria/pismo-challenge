@@ -26,7 +26,6 @@ func (ar *AccountRepository) CreateTransaction(tr domains.Transaction) (domains.
 	tr.ID = uuid.New()
 	tr.EventDate = time.Now().UTC()
 
-	// TODO: Adjust to handle possible coner-cases beyond duplicate key
 	if err := ar.DB.Create(&tr).Error; err != nil {
 		return tr, err
 	}
