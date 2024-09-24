@@ -22,7 +22,7 @@ func TestShouldCreateTransactionSuccessfully(t *testing.T) {
 	accId := uuid.New()
 
 	accSvc := accRepo.NewAccountsService()
-	accSvc.On("GetUserAccount", accId.String()).Return(accDomain.Account{}, nil)
+	accSvc.On("GetAccount", accId.String()).Return(accDomain.Account{}, nil)
 
 	ttSvc := ttSvc.NewOperationTypesService()
 	ttSvc.On("GetOperationType", 1).Return(ttDomain.OperationType{}, nil)
@@ -54,7 +54,7 @@ func TestShouldHandleTransactionCreationErrors(t *testing.T) {
 	accId := uuid.New()
 
 	accSvc := accRepo.NewAccountsService()
-	accSvc.On("GetUserAccount", accId.String()).Return(accDomain.Account{}, nil)
+	accSvc.On("GetAccount", accId.String()).Return(accDomain.Account{}, nil)
 
 	ttSvc := ttSvc.NewOperationTypesService()
 	ttSvc.On("GetOperationType", 1).Return(ttDomain.OperationType{}, nil)
@@ -77,7 +77,7 @@ func TestShouldHandleAccountInfoErrors(t *testing.T) {
 	accId := uuid.New()
 
 	accSvc := accRepo.NewAccountsService()
-	accSvc.On("GetUserAccount", accId.String()).Return(accDomain.Account{}, fmt.Errorf("some error"))
+	accSvc.On("GetAccount", accId.String()).Return(accDomain.Account{}, fmt.Errorf("some error"))
 
 	ttSvc := ttSvc.NewOperationTypesService()
 	ttSvc.On("GetOperationType", 1).Return(ttDomain.OperationType{}, nil)
@@ -100,7 +100,7 @@ func TestShouldHandleOperationTypeInfoErrors(t *testing.T) {
 	accId := uuid.New()
 
 	accSvc := accRepo.NewAccountsService()
-	accSvc.On("GetUserAccount", accId.String()).Return(accDomain.Account{}, nil)
+	accSvc.On("GetAccount", accId.String()).Return(accDomain.Account{}, nil)
 
 	ttSvc := ttSvc.NewOperationTypesService()
 	ttSvc.On("GetOperationType", 1).Return(ttDomain.OperationType{}, fmt.Errorf("some error"))

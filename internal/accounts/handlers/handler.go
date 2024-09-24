@@ -21,16 +21,16 @@ func NewAccountsHandler(asp services.AccountServiceProvider) *AccountsHandler {
 	}
 }
 
-// Create User Account		godoc
-// @Summary 							Create a new user account
-// @Description						Save a new user in DB
-// @Param									account body request.UserAccountRequest true "Create user account"
+// Create  Account		godoc
+// @Summary 							Create a new  account
+// @Description						Save a new  in DB
+// @Param									account body request.AccountRequest true "Create  account"
 // @Produce 							application/json
 // @Tags 									accounts
-// @Success 							201 {object} response.UserAccountResponse
+// @Success 							201 {object} response.AccountResponse
 // @Router 								/v1/accounts [post]
-func (ah AccountsHandler) CreateUserAccount(c *gin.Context) {
-	body := request.UserAccountRequest{}
+func (ah AccountsHandler) CreateAccount(c *gin.Context) {
+	body := request.AccountRequest{}
 
 	err := c.ShouldBindBodyWithJSON(&body)
 	if err != nil {
@@ -46,7 +46,7 @@ func (ah AccountsHandler) CreateUserAccount(c *gin.Context) {
 		return
 	}
 
-	res, err := ah.asp.CreateUserAccount(body)
+	res, err := ah.asp.CreateAccount(body)
 	if err != nil {
 		switch {
 		case errors.Is(err, svcErrors.ErrAccountDuplicated):
@@ -57,28 +57,28 @@ func (ah AccountsHandler) CreateUserAccount(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusCreated, response.UserAccountResponse{
+	c.JSON(http.StatusCreated, response.AccountResponse{
 		AccountId:      res.ID.String(),
 		DocumentNumber: res.DocumentNumber,
 	})
 }
 
-// Create User Account		godoc
-// @Summary 							Get user's account
-// @Description						Get the user account stored in DB
+// Create  Account		godoc
+// @Summary 							Get 's account
+// @Description						Get the  account stored in DB
 // @Param									id path string true "get account by id"
 // @Produce 							application/json
 // @Tags 									accounts
-// @Success 							200 {object} response.UserAccountResponse
+// @Success 							200 {object} response.AccountResponse
 // @Router 								/v1/accounts/{id} [get]
-func (ah AccountsHandler) GetUserAccount(c *gin.Context) {
+func (ah AccountsHandler) GetAccount(c *gin.Context) {
 	id := c.Param("id")
 	if id == "" {
 		c.JSON(http.StatusBadRequest, gin.H{"errors": "missing identifier"})
 		return
 	}
 
-	ua, err := ah.asp.GetUserAccount(id)
+	ua, err := ah.asp.GetAccount(id)
 	if err != nil {
 		switch {
 		case errors.Is(err, svcErrors.ErrAccountNotFound):
@@ -89,7 +89,7 @@ func (ah AccountsHandler) GetUserAccount(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, response.UserAccountResponse{
+	c.JSON(http.StatusOK, response.AccountResponse{
 		AccountId:      ua.ID.String(),
 		DocumentNumber: ua.DocumentNumber,
 	})

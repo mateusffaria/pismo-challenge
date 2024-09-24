@@ -24,7 +24,7 @@ Feature checklist:
 - [x] Create User Account
   - [x] Unit test
   - [x] Implementation
-  - [] Refactor -> Remove "User" from method names
+  - [x] Refactor -> Remove "User" from method names
   - [x] Error handling
 - [x] Get User Account
   - [x] Unit test
@@ -37,4 +37,4 @@ Feature checklist:
   - [x] Implementation
     - [x] Enum for transaction type validation
   - [x] Refactor
-  - [] Error handling
+  - [x] Error handling

@@ -23,10 +23,10 @@ func NewTransactionHandler(tsp services.TransactionServiceProvider) *Transaction
 	}
 }
 
-// Create User Transaction		godoc
-// @Summary 									Create a new user transaction
-// @Description								Save a new user in DB
-// @Param											transaction body request.NewTransactionRequest true "Create trasaction for a given user"
+// Create  Transaction		godoc
+// @Summary 									Create a new  transaction
+// @Description								Save a new  in DB
+// @Param											transaction body request.NewTransactionRequest true "Create trasaction for a given "
 // @Produce 									application/json
 // @Tags 											transactions
 // @Success 									201 {object} response.NewTransactionResponse

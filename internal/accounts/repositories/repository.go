@@ -7,8 +7,8 @@ import (
 )
 
 type AccountRepositoryProvider interface {
-	CreateUserAccount(acc domains.Account) (domains.Account, error)
-	GetUserAccount(id string) (domains.Account, error)
+	CreateAccount(acc domains.Account) (domains.Account, error)
+	GetAccount(id string) (domains.Account, error)
 }
 
 type AccountRepository struct {
@@ -21,7 +21,7 @@ func NewAccountRepository(db *gorm.DB) *AccountRepository {
 	}
 }
 
-func (ar *AccountRepository) CreateUserAccount(acc domains.Account) (domains.Account, error) {
+func (ar *AccountRepository) CreateAccount(acc domains.Account) (domains.Account, error) {
 	acc.ID = uuid.New()
 
 	if err := ar.DB.Create(&acc).Error; err != nil {
@@ -31,7 +31,7 @@ func (ar *AccountRepository) CreateUserAccount(acc domains.Account) (domains.Acc
 	return acc, nil
 }
 
-func (ar *AccountRepository) GetUserAccount(id string) (domains.Account, error) {
+func (ar *AccountRepository) GetAccount(id string) (domains.Account, error) {
 	var acc domains.Account
 
 	res := ar.DB.First(&acc, "id = ?", id)

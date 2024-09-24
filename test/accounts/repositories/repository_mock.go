@@ -13,13 +13,13 @@ func NewAccountRepositoryMock() *AccountRepositoryMock {
 	return &AccountRepositoryMock{}
 }
 
-func (m *AccountRepositoryMock) CreateUserAccount(acc domains.Account) (domains.Account, error) {
+func (m *AccountRepositoryMock) CreateAccount(acc domains.Account) (domains.Account, error) {
 	args := m.Called(acc)
 
 	return args.Get(0).(domains.Account), args.Error(1)
 }
 
-func (m *AccountRepositoryMock) GetUserAccount(id string) (domains.Account, error) {
+func (m *AccountRepositoryMock) GetAccount(id string) (domains.Account, error) {
 	args := m.Called(id)
 
 	return args.Get(0).(domains.Account), args.Error(1)

@@ -12,8 +12,8 @@ import (
 )
 
 type AccountServiceProvider interface {
-	CreateUserAccount(uar request.UserAccountRequest) (domains.Account, error)
-	GetUserAccount(id string) (domains.Account, error)
+	CreateAccount(uar request.AccountRequest) (domains.Account, error)
+	GetAccount(id string) (domains.Account, error)
 }
 
 type AccountService struct {
@@ -26,12 +26,12 @@ func NewAccountService(ar repositories.AccountRepositoryProvider) *AccountServic
 	}
 }
 
-func (as *AccountService) CreateUserAccount(uar request.UserAccountRequest) (domains.Account, error) {
-	ac, err := as.ar.CreateUserAccount(domains.Account{
+func (as *AccountService) CreateAccount(uar request.AccountRequest) (domains.Account, error) {
+	ac, err := as.ar.CreateAccount(domains.Account{
 		DocumentNumber: uar.DocumentNumber,
 	})
 	if err != nil {
-		log.Default().Printf("\nfailed to create user account %v\n", err)
+		log.Default().Printf("\nfailed to create  account %v\n", err)
 		switch {
 		case errors.Is(err, gorm.ErrDuplicatedKey):
 			return ac, customErrors.ErrAccountDuplicated
@@ -43,10 +43,10 @@ func (as *AccountService) CreateUserAccount(uar request.UserAccountRequest) (dom
 	return ac, err
 }
 
-func (as *AccountService) GetUserAccount(id string) (domains.Account, error) {
-	ac, err := as.ar.GetUserAccount(id)
+func (as *AccountService) GetAccount(id string) (domains.Account, error) {
+	ac, err := as.ar.GetAccount(id)
 	if err != nil {
-		log.Default().Printf("\nfailed to get user data %v\n", err)
+		log.Default().Printf("\nfailed to get  data %v\n", err)
 		switch {
 		case errors.Is(err, gorm.ErrRecordNotFound):
 			return ac, customErrors.ErrAccountNotFound

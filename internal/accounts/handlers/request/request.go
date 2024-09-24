@@ -7,11 +7,11 @@ import (
 	"github.com/mateusffaria/pismo-challenge/internal/accounts/handlers/request/errors"
 )
 
-type UserAccountRequest struct {
+type AccountRequest struct {
 	DocumentNumber string `json:"document_number,omitempty" validate:"required"`
 }
 
-func (uar *UserAccountRequest) Validate() error {
+func (uar *AccountRequest) Validate() error {
 	validator := validate.New(validate.WithRequiredStructEnabled())
 	err := validator.Struct(uar)
 	if err != nil {

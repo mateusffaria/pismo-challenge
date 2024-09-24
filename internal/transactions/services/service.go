@@ -35,7 +35,7 @@ func NewTransactionService(
 }
 
 func (ts *TransactionService) CreateTransaction(tr request.NewTransactionRequest) (domains.Transaction, error) {
-	_, err := ts.as.GetUserAccount(tr.AccountId)
+	_, err := ts.as.GetAccount(tr.AccountId)
 	if err != nil {
 		log.Default().Printf("\nfailed getting account owner info %v\n", err)
 		return domains.Transaction{}, err

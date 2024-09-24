@@ -8,7 +8,7 @@ import (
 )
 
 func TestShouldValidateAccountRequestSuccessfully(t *testing.T) {
-	req := request.UserAccountRequest{
+	req := request.AccountRequest{
 		DocumentNumber: "12345",
 	}
 
@@ -18,7 +18,7 @@ func TestShouldValidateAccountRequestSuccessfully(t *testing.T) {
 }
 
 func TestShouldReturnErrorWhenInvalidBody(t *testing.T) {
-	req := request.UserAccountRequest{}
+	req := request.AccountRequest{}
 
 	err := req.Validate()
 
