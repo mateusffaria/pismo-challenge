@@ -3,13 +3,16 @@ package request_test
 import (
 	"testing"
 
-	"github.com/mateusffaria/pismo-challenge/internal/accounts/handlers/request"
+	"github.com/google/uuid"
+	"github.com/mateusffaria/pismo-challenge/internal/transactions/handlers/request"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestShouldValidateAccountRequestSuccessfully(t *testing.T) {
-	req := request.UserAccountRequest{
-		DocumentNumber: "12345",
+	req := request.NewTransactionRequest{
+		AccountId:       uuid.New().String(),
+		OperationTypeId: 1,
+		Amount:          123,
 	}
 
 	err := req.Validate()
@@ -18,7 +21,7 @@ func TestShouldValidateAccountRequestSuccessfully(t *testing.T) {
 }
 
 func TestShouldReturnErrorWhenInvalidBody(t *testing.T) {
-	req := request.UserAccountRequest{}
+	req := request.NewTransactionRequest{}
 
 	err := req.Validate()
 
