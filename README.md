@@ -24,14 +24,14 @@ Feature checklist:
 - [x] Create User Account
   - [x] Unit test
   - [x] Implementation
-  - [] Refactor
-  - [] Error handling
+  - [] Refactor -> Remove "User" from method names
+  - [x] Error handling
 - [x] Get User Account
-  - [] Unit test
-  - [] Implementation
-  - [] Refactor
-  - [] Error handling
-- [x] Create User Transaction
+  - [x] Unit test
+  - [x] Implementation
+  - [x] Refactor
+  - [x] Error handling
+- [] Create User Transaction
   - [] Unit test
   - [] Integration test
   - [] Implementation

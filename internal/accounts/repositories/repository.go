@@ -24,7 +24,6 @@ func NewAccountRepository(db *gorm.DB) *AccountRepository {
 func (ar *AccountRepository) CreateUserAccount(acc domains.Account) (domains.Account, error) {
 	acc.ID = uuid.New()
 
-	// TODO: Adjust to handle possible coner-cases beyond duplicate key
 	if err := ar.DB.Create(&acc).Error; err != nil {
 		return acc, err
 	}
@@ -33,11 +32,12 @@ func (ar *AccountRepository) CreateUserAccount(acc domains.Account) (domains.Acc
 }
 
 func (ar *AccountRepository) GetUserAccount(id string) (domains.Account, error) {
-	var ua domains.Account
-	res := ar.DB.First(&ua, "id = ?", id)
+	var acc domains.Account
+
+	res := ar.DB.First(&acc, "id = ?", id)
 	if res.Error != nil {
-		return ua, res.Error
+		return acc, res.Error
 	}
 
-	return ua, nil
+	return acc, nil
 }
