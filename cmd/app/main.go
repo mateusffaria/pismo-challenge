@@ -10,6 +10,7 @@ import (
 	"github.com/mateusffaria/pismo-challenge/configs"
 	_ "github.com/mateusffaria/pismo-challenge/docs"
 	accountsAPI "github.com/mateusffaria/pismo-challenge/internal/accounts/api"
+	transactionsAPI "github.com/mateusffaria/pismo-challenge/internal/transactions/api"
 	swagFiles "github.com/swaggo/files"
 	ginSwag "github.com/swaggo/gin-swagger"
 )
@@ -49,6 +50,7 @@ func main() {
 	}
 
 	accountsAPI.SetupApi(r, db)
+	transactionsAPI.SetupApi(r, db)
 
 	r.Run(":" + "8080")
 }

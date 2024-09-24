@@ -19,14 +19,14 @@ func NewTransactionHandler(asp services.TransactionServiceProvider) *Transaction
 	}
 }
 
-// Create User Account		godoc
-// @Summary 							Create a new user account
-// @Description						Save a new user in DB
-// @Param									account body request.NewTransactionRequest true "Create trasaction for a given user"
-// @Produce 							application/json
-// @Tags 									accounts
-// @Success 							201 {object} response.NewTransactionResponse
-// @Router 								/v1/transactions [post]
+// Create User Transaction		godoc
+// @Summary 									Create a new user transaction
+// @Description								Save a new user in DB
+// @Param											transaction body request.NewTransactionRequest true "Create trasaction for a given user"
+// @Produce 									application/json
+// @Tags 											transactions
+// @Success 									201 {object} response.NewTransactionResponse
+// @Router 										/v1/transactions [post]
 func (ah TransactionHandler) CreateTransaction(c *gin.Context) {
 	body := request.NewTransactionRequest{}
 
@@ -47,10 +47,13 @@ func (ah TransactionHandler) CreateTransaction(c *gin.Context) {
 	res, err := ah.asp.CreateTransaction(body)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"errors": err.Error()})
+		return
 	}
 
-	// TODO: Adjust response
 	c.JSON(http.StatusCreated, response.NewTransactionResponse{
-		AccountId: res.ID.String(),
+		TransactionId:   res.ID.String(),
+		AccountId:       res.ID.String(),
+		OperationTypeId: res.OperationTypeId,
+		Amount:          res.Amount,
 	})
 }

@@ -16,7 +16,7 @@ type AccountRepository struct {
 	DB *gorm.DB
 }
 
-func NewAccountRepository(db *gorm.DB) *AccountRepository {
+func NewTransactionRepository(db *gorm.DB) *AccountRepository {
 	return &AccountRepository{
 		DB: db,
 	}

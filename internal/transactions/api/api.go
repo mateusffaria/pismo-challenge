@@ -2,20 +2,29 @@ package api
 
 import (
 	"github.com/gin-gonic/gin"
-	accountsHandler "github.com/mateusffaria/pismo-challenge/internal/accounts/handlers"
-	"github.com/mateusffaria/pismo-challenge/internal/accounts/repositories"
-	"github.com/mateusffaria/pismo-challenge/internal/accounts/services"
+	accRepo "github.com/mateusffaria/pismo-challenge/internal/accounts/repositories"
+	accSvc "github.com/mateusffaria/pismo-challenge/internal/accounts/services"
+	ttRepo "github.com/mateusffaria/pismo-challenge/internal/transaction_types/repositories"
+	ttSvc "github.com/mateusffaria/pismo-challenge/internal/transaction_types/services"
+	accountsHandler "github.com/mateusffaria/pismo-challenge/internal/transactions/handlers"
+	"github.com/mateusffaria/pismo-challenge/internal/transactions/repositories"
+	"github.com/mateusffaria/pismo-challenge/internal/transactions/services"
 	"gorm.io/gorm"
 )
 
 func SetupApi(r *gin.Engine, db *gorm.DB) {
-	ar := repositories.NewAccountRepository(db)
-	as := services.NewAccountService(ar)
-	ah := accountsHandler.NewAccountsHandler(as)
+	ar := accRepo.NewAccountRepository(db)
+	as := accSvc.NewAccountService(ar)
+
+	ttr := ttRepo.NewTransactionType(db)
+	tts := ttSvc.NewTransactionTypesService(ttr)
+
+	tr := repositories.NewTransactionRepository(db)
+	ts := services.NewTransactionService(tr, as, tts)
+	th := accountsHandler.NewTransactionHandler(ts)
 
 	group := r.Group("/api/v1")
 	{
-		group.POST("/transactions", ah.CreateUserAccount)
-		group.GET("/accounts/:id", ah.GetUserAccount)
+		group.POST("/transactions", th.CreateTransaction)
 	}
 }
