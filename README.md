@@ -1,4 +1,4 @@
-# Project Name
+# Pismo challenge
 
 This project is a Go application designed with a focus on maintainability, scalability, and modern software architecture principles.
 
