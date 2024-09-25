@@ -56,7 +56,7 @@ Access the generated documentation via:
 
 ### Setting up the Test Database
 
-To run tests, ensure the test database is up:
+To run integration tests, ensure the test database is up:
 
 ```bash
 docker compose --env-file=./configs/.local.env -f ./deployments/docker-compose.yaml up db_test
@@ -64,7 +64,7 @@ docker compose --env-file=./configs/.local.env -f ./deployments/docker-compose.y
 
 ### Unit Tests
 
-Run unit tests for the application:
+The unit tests was made focusing on the account and transaction creations and fetching operations, to run the unit tests for the application:
 
 ```bash
 go test -v ./internal/...
@@ -72,6 +72,7 @@ go test -v ./internal/...
 
 ### Integration Tests
 
+The integration tests was made focusing on the full transaction creation flow
 Before running integration tests, make sure the test database is running (`db_test`):
 
 ```bash
