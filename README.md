@@ -19,6 +19,7 @@ To run the application locally, ensure all dependencies are installed and proper
 ```bash
 docker compose --env-file=./configs/.local.env -f ./deployments/docker-compose.yaml up postgres
 go mod tidy   # Install Go dependencies
+go mod vendor
 go run ./cmd/app
 ```
 
@@ -93,7 +94,7 @@ For hot-reloading during development, use [Air](https://github.com/cosmtrek/air)
 
 ```bash
 go install github.com/cosmtrek/air@latest
-air
+air --build.cmd "go build -o tmp/main cmd/app/main.go" --build.bin "./tmp/main"
 ```
 
 This will automatically reload the application on file changes, enhancing development productivity.
