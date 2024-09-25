@@ -17,6 +17,7 @@ Ensure the following dependencies are installed:
 To run the application locally, ensure all dependencies are installed and properly configured:
 
 ```bash
+docker compose --env-file=./configs/.local.env -f ./deployments/docker-compose.yaml up postgres
 go mod tidy   # Install Go dependencies
 go run ./cmd/app
 ```
