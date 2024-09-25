@@ -9,7 +9,7 @@ services:
       POSTGRES_DB: "${DB_NAME}"
     ports:
       - "5432:5432"
-  postgres_test:
+  db_test:
     image: postgres
     volumes:
       - pgdata_test:/var/lib/postgresql/data
@@ -32,7 +32,7 @@ services:
       DB_TEST_PASSWORD: "${DB_TEST_PASSWORD}"
       DB_TEST_USER: "${DB_TEST_USER}"
       DB_TEST_NAME: "${DB_TEST_NAME}"
-      DB_TEST_HOST: "postgres_test"
+      DB_TEST_HOST: "db_test"
       GIN_MODE: release
     ports:
       - "8080:8080"
