@@ -100,7 +100,7 @@ This will automatically reload the application on file changes, enhancing develo
 
 ## Key Features
 
-- **Go Project Standard**: Follows best practices in Go application structure.
+- **Go Project Standard**: Follows best practices in Go application structure. [Link](https://github.com/golang-standards/project-layout)
 - **Hexagonal Architecture**: Implements domain-driven design principles.
 - **Automated Testing**: Full suite of unit and integration tests.
 - **Dockerized**: All services run in Docker containers for easy local setup.
