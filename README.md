@@ -1,49 +1,112 @@
-## Docker setup
+# Project Name
 
-- docker build -t <image-tag> -f ./deployments/Dockerfile .
-- docker compose --env-file=./configs/.local.env -f ./deployments/docker-compose.yaml up
-- swagger setup
-  go install github.com/go-swagger/go-swagger/cmd/swagger@latest
-	go install github.com/swaggo/swag/cmd/swag@latest
-  swag init -g ./cmd/app/main.go -o ./docs
+This project is a Go application designed with a focus on maintainability, scalability, and modern software architecture principles.
 
-test db: docker compose --env-file=./configs/.local.env -f ./deployments/docker-compose.yaml up postgres_test
-migration creation: migrate create -ext sql -dir db/migrations -seq create_operation_types_table
-separate unit/integartion:
+## Prerequisites
 
-test: go test -v ./...
+Ensure the following dependencies are installed:
 
-live reload: air
+- **Go**: version 1.23.1
+- **Docker**: version 27.2.1
+- **Docker Compose**
+- **migrate**: database migration tool
+- **Swagger**: API documentation tools
 
-## Challenge backlog
+## Running the Application Locally (Without Docker)
 
-Basic setup:
+To run the application locally, ensure all dependencies are installed and properly configured:
 
-- [x] Docker setup
-- [x] Swagger setup
-- [x] Adjust Readme containning all instructions (run, docker setup, testing)
-- [x] Git/Github setup
-- [x] .env setup
-- [] golang-lint
+```bash
+go mod tidy   # Install Go dependencies
+go run ./cmd/app
+```
 
-Feature checklist:
+## Docker Setup (Local Environment)
 
-- [x] Persistance layer
-- [x] Automated tests (unit, integration and E-E)
-- [x] Create User Account
-  - [x] Unit test
-  - [x] Implementation
-  - [x] Refactor -> Remove "User" from method names
-  - [x] Error handling
-- [x] Get User Account
-  - [x] Unit test
-  - [x] Implementation
-  - [x] Refactor
-  - [x] Error handling
-- [x] Create User Transaction
-  - [x] Unit test
-  - [x] Integration test
-  - [x] Implementation
-    - [x] Enum for transaction type validation
-  - [x] Refactor
-  - [x] Error handling
+To spin up the entire application in a Dockerized environment, run the following command:
+
+```bash
+docker compose --env-file=./configs/.local.env -f ./deployments/docker-compose.yaml up app
+```
+
+This will bring up the app with its necessary services defined in the `docker-compose.yaml` file.
+
+## API Documentation (Swagger)
+
+The API documentation is auto-generated using Swagger. Ensure the Swagger tools are installed:
+
+```bash
+go install github.com/go-swagger/go-swagger/cmd/swagger@latest
+go install github.com/swaggo/swag/cmd/swag@latest
+```
+
+Generate Swagger docs:
+
+```bash
+swag init -g ./cmd/app/main.go -o ./docs
+```
+
+Access the generated documentation via:
+
+[Swagger UI](http://localhost:8080/api/docs/index.html)
+
+## Running Tests
+
+### Setting up the Test Database
+
+To run tests, ensure the test database is up:
+
+```bash
+docker compose --env-file=./configs/.local.env -f ./deployments/docker-compose.yaml up db_test
+```
+
+### Unit Tests
+
+Run unit tests for the application:
+
+```bash
+go test -v ./internal/...
+```
+
+### Integration Tests
+
+Before running integration tests, make sure the test database is running (`db_test`):
+
+```bash
+go test -v ./test/...
+```
+
+## Database Migrations
+
+Manage database schema changes using `golang-migrate`. To create a new migration:
+
+```bash
+migrate create -ext sql -dir db/migrations -seq create_operation_types_table
+```
+
+Ensure the `migrate` tool is installed and available in your `PATH`.
+
+## Live Reload for Development
+
+For hot-reloading during development, use [Air](https://github.com/cosmtrek/air):
+
+```bash
+go install github.com/cosmtrek/air@latest
+air
+```
+
+This will automatically reload the application on file changes, enhancing development productivity.
+
+## Key Features
+
+- **Go Project Standard**: Follows best practices in Go application structure.
+- **Hexagonal Architecture**: Implements domain-driven design principles.
+- **Automated Testing**: Full suite of unit and integration tests.
+- **Dockerized**: All services run in Docker containers for easy local setup.
+- **Database Migrations**: Handles schema changes using `golang-migrate`.
+- **Request Validation**: Uses `go-playground/validator` for robust validation.
+- **Live Reload**: The `Air` package ensures seamless reloading during development.
+
+## Swagger Documentation
+
+Full API specification is available [here](https://github.com/mateusffaria/pismo-challenge/blob/main/docs/swagger.yaml).
