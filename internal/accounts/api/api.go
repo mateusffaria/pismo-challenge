@@ -1,10 +1,11 @@
 package api
 
 import (
+	accountsHandler "pismo-challenge/internal/accounts/handlers"
+	"pismo-challenge/internal/accounts/repositories"
+	"pismo-challenge/internal/accounts/services"
+
 	"github.com/gin-gonic/gin"
-	accountsHandler "github.com/mateusffaria/pismo-challenge/internal/accounts/handlers"
-	"github.com/mateusffaria/pismo-challenge/internal/accounts/repositories"
-	"github.com/mateusffaria/pismo-challenge/internal/accounts/services"
 	"gorm.io/gorm"
 )
 

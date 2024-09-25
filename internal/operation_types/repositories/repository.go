@@ -1,7 +1,8 @@
 package repositories
 
 import (
-	"github.com/mateusffaria/pismo-challenge/internal/operation_types/domains"
+	"pismo-challenge/internal/operation_types/domains"
+
 	"gorm.io/gorm"
 )
 

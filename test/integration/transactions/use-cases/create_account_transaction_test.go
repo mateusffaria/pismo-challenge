@@ -9,14 +9,14 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 
-	accountsAPI "github.com/mateusffaria/pismo-challenge/internal/accounts/api"
-	"github.com/mateusffaria/pismo-challenge/internal/accounts/handlers/request"
-	aResponse "github.com/mateusffaria/pismo-challenge/internal/accounts/handlers/response"
-	transactionsAPI "github.com/mateusffaria/pismo-challenge/internal/transactions/api"
-	tRequest "github.com/mateusffaria/pismo-challenge/internal/transactions/handlers/request"
-	tResponse "github.com/mateusffaria/pismo-challenge/internal/transactions/handlers/response"
+	accountsAPI "pismo-challenge/internal/accounts/api"
+	"pismo-challenge/internal/accounts/handlers/request"
+	aResponse "pismo-challenge/internal/accounts/handlers/response"
+	transactionsAPI "pismo-challenge/internal/transactions/api"
+	tRequest "pismo-challenge/internal/transactions/handlers/request"
+	tResponse "pismo-challenge/internal/transactions/handlers/response"
 
-	dbSetup "github.com/mateusffaria/pismo-challenge/test/integration/db"
+	dbSetup "pismo-challenge/test/integration/db"
 )
 
 func TestShouldCreateAccountTransactionSuccessfully(t *testing.T) {

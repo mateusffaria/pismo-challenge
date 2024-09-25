@@ -1,14 +1,15 @@
 package api
 
 import (
+	accRepo "pismo-challenge/internal/accounts/repositories"
+	accSvc "pismo-challenge/internal/accounts/services"
+	ttRepo "pismo-challenge/internal/operation_types/repositories"
+	ttSvc "pismo-challenge/internal/operation_types/services"
+	accountsHandler "pismo-challenge/internal/transactions/handlers"
+	"pismo-challenge/internal/transactions/repositories"
+	"pismo-challenge/internal/transactions/services"
+
 	"github.com/gin-gonic/gin"
-	accRepo "github.com/mateusffaria/pismo-challenge/internal/accounts/repositories"
-	accSvc "github.com/mateusffaria/pismo-challenge/internal/accounts/services"
-	ttRepo "github.com/mateusffaria/pismo-challenge/internal/operation_types/repositories"
-	ttSvc "github.com/mateusffaria/pismo-challenge/internal/operation_types/services"
-	accountsHandler "github.com/mateusffaria/pismo-challenge/internal/transactions/handlers"
-	"github.com/mateusffaria/pismo-challenge/internal/transactions/repositories"
-	"github.com/mateusffaria/pismo-challenge/internal/transactions/services"
 	"gorm.io/gorm"
 )
 

@@ -4,11 +4,12 @@ import (
 	"errors"
 	"net/http"
 
+	"pismo-challenge/internal/accounts/handlers/request"
+	"pismo-challenge/internal/accounts/handlers/response"
+	"pismo-challenge/internal/accounts/services"
+	svcErrors "pismo-challenge/internal/accounts/services/errors"
+
 	"github.com/gin-gonic/gin"
-	"github.com/mateusffaria/pismo-challenge/internal/accounts/handlers/request"
-	"github.com/mateusffaria/pismo-challenge/internal/accounts/handlers/response"
-	"github.com/mateusffaria/pismo-challenge/internal/accounts/services"
-	svcErrors "github.com/mateusffaria/pismo-challenge/internal/accounts/services/errors"
 )
 
 type AccountsHandler struct {

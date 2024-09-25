@@ -3,8 +3,9 @@ package repositories
 import (
 	"time"
 
+	"pismo-challenge/internal/transactions/domains"
+
 	"github.com/google/uuid"
-	"github.com/mateusffaria/pismo-challenge/internal/transactions/domains"
 	"gorm.io/gorm"
 )
 

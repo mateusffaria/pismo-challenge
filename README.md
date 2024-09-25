@@ -4,7 +4,16 @@
 - docker compose --env-file=./configs/.local.env -f ./deployments/docker-compose.yaml up
 - swagger setup
   go install github.com/go-swagger/go-swagger/cmd/swagger@latest
+	go install github.com/swaggo/swag/cmd/swag@latest
   swag init -g ./cmd/app/main.go -o ./docs
+
+test db: docker compose --env-file=./configs/.local.env -f ./deployments/docker-compose.yaml up postgres_test
+migration creation: migrate create -ext sql -dir db/migrations -seq create_operation_types_table
+separate unit/integartion:
+
+test: go test -v ./...
+
+live reload: air
 
 ## Challenge backlog
 

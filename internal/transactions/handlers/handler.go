@@ -5,12 +5,13 @@ import (
 	"fmt"
 	"net/http"
 
+	asErrors "pismo-challenge/internal/accounts/services/errors"
+	ttErrors "pismo-challenge/internal/operation_types/services/errors"
+	"pismo-challenge/internal/transactions/handlers/request"
+	"pismo-challenge/internal/transactions/handlers/response"
+	"pismo-challenge/internal/transactions/services"
+
 	"github.com/gin-gonic/gin"
-	asErrors "github.com/mateusffaria/pismo-challenge/internal/accounts/services/errors"
-	ttErrors "github.com/mateusffaria/pismo-challenge/internal/operation_types/services/errors"
-	"github.com/mateusffaria/pismo-challenge/internal/transactions/handlers/request"
-	"github.com/mateusffaria/pismo-challenge/internal/transactions/handlers/response"
-	"github.com/mateusffaria/pismo-challenge/internal/transactions/services"
 )
 
 type TransactionHandler struct {

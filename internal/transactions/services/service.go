@@ -3,13 +3,14 @@ package services
 import (
 	"log"
 
+	accSvc "pismo-challenge/internal/accounts/services"
+	ttSvc "pismo-challenge/internal/operation_types/services"
+	"pismo-challenge/internal/transactions/domains"
+	"pismo-challenge/internal/transactions/handlers/request"
+	"pismo-challenge/internal/transactions/repositories"
+	customErrors "pismo-challenge/internal/transactions/services/errors"
+
 	"github.com/google/uuid"
-	accSvc "github.com/mateusffaria/pismo-challenge/internal/accounts/services"
-	ttSvc "github.com/mateusffaria/pismo-challenge/internal/operation_types/services"
-	"github.com/mateusffaria/pismo-challenge/internal/transactions/domains"
-	"github.com/mateusffaria/pismo-challenge/internal/transactions/handlers/request"
-	"github.com/mateusffaria/pismo-challenge/internal/transactions/repositories"
-	customErrors "github.com/mateusffaria/pismo-challenge/internal/transactions/services/errors"
 	"github.com/shopspring/decimal"
 )
 

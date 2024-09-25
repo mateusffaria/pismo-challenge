@@ -1,8 +1,9 @@
 package services_test
 
 import (
-	"github.com/mateusffaria/pismo-challenge/internal/accounts/domains"
-	"github.com/mateusffaria/pismo-challenge/internal/accounts/handlers/request"
+	"pismo-challenge/internal/accounts/domains"
+	"pismo-challenge/internal/accounts/handlers/request"
+
 	"github.com/stretchr/testify/mock"
 )
 

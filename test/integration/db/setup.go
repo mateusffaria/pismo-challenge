@@ -5,8 +5,9 @@ import (
 	"log"
 	"os"
 
+	"pismo-challenge/configs"
+
 	"github.com/joho/godotenv"
-	"github.com/mateusffaria/pismo-challenge/configs"
 	"gorm.io/gorm"
 )
 

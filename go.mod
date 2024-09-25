@@ -1,4 +1,4 @@
-module github.com/mateusffaria/pismo-challenge
+module pismo-challenge
 
 go 1.23.1
 

@@ -4,11 +4,12 @@ import (
 	"fmt"
 	"testing"
 
+	"pismo-challenge/internal/accounts/domains"
+	"pismo-challenge/internal/accounts/handlers/request"
+	svcErrors "pismo-challenge/internal/accounts/services/errors"
+	repositories_test "pismo-challenge/test/accounts/repositories"
+
 	"github.com/google/uuid"
-	"github.com/mateusffaria/pismo-challenge/internal/accounts/domains"
-	"github.com/mateusffaria/pismo-challenge/internal/accounts/handlers/request"
-	svcErrors "github.com/mateusffaria/pismo-challenge/internal/accounts/services/errors"
-	repositories_test "github.com/mateusffaria/pismo-challenge/test/accounts/repositories"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"gorm.io/gorm"

@@ -4,10 +4,11 @@ import (
 	"errors"
 	"log"
 
-	"github.com/mateusffaria/pismo-challenge/internal/accounts/domains"
-	"github.com/mateusffaria/pismo-challenge/internal/accounts/handlers/request"
-	"github.com/mateusffaria/pismo-challenge/internal/accounts/repositories"
-	customErrors "github.com/mateusffaria/pismo-challenge/internal/accounts/services/errors"
+	"pismo-challenge/internal/accounts/domains"
+	"pismo-challenge/internal/accounts/handlers/request"
+	"pismo-challenge/internal/accounts/repositories"
+	customErrors "pismo-challenge/internal/accounts/services/errors"
+
 	"gorm.io/gorm"
 )
 

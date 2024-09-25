@@ -3,8 +3,9 @@ package request_test
 import (
 	"testing"
 
+	"pismo-challenge/internal/transactions/handlers/request"
+
 	"github.com/google/uuid"
-	"github.com/mateusffaria/pismo-challenge/internal/transactions/handlers/request"
 	"github.com/stretchr/testify/assert"
 )
 

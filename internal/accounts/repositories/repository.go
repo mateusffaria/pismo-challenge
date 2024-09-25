@@ -1,8 +1,9 @@
 package repositories
 
 import (
+	"pismo-challenge/internal/accounts/domains"
+
 	"github.com/google/uuid"
-	"github.com/mateusffaria/pismo-challenge/internal/accounts/domains"
 	"gorm.io/gorm"
 )
 

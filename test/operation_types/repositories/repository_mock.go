@@ -1,7 +1,8 @@
 package repositories_test
 
 import (
-	"github.com/mateusffaria/pismo-challenge/internal/operation_types/domains"
+	"pismo-challenge/internal/operation_types/domains"
+
 	"github.com/stretchr/testify/mock"
 )
 

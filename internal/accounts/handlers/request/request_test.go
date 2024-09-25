@@ -3,7 +3,8 @@ package request_test
 import (
 	"testing"
 
-	"github.com/mateusffaria/pismo-challenge/internal/accounts/handlers/request"
+	"pismo-challenge/internal/accounts/handlers/request"
+
 	"github.com/stretchr/testify/assert"
 )
 

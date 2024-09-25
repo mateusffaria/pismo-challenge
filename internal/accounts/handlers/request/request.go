@@ -3,8 +3,9 @@ package request
 import (
 	"fmt"
 
+	"pismo-challenge/internal/accounts/handlers/request/errors"
+
 	validate "github.com/go-playground/validator/v10"
-	"github.com/mateusffaria/pismo-challenge/internal/accounts/handlers/request/errors"
 )
 
 type AccountRequest struct {

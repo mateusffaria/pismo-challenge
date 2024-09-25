@@ -8,7 +8,6 @@ type bodyError struct {
 	message interface{}
 }
 
-// TODO: Change to new format
 func NewBodyError(msg interface{}) *bodyError {
 	return &bodyError{
 		message: msg,
